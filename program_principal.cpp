@@ -15,6 +15,7 @@ using namespace std;
 #define cyan    "\x1B[36m"
 #define white   "\x1B[37m"
 
+int main();
 void afiseazaathlete();
 void afiseaza_sport();
 void inregistreaza_sportiv();
@@ -75,17 +76,112 @@ void inregistreaza_sport()
 
 void inregistreaza_sportiv()
 {
+    string nume,prenume,id_sport;
+    char gen;
+    float greutate,inaltime;
+    int varsta;
+    string nume1,prenume1,id_sport1,s;
+    char gen1;
+    float greutate1 , inaltime1;
+    int varsta1;
+    ofstream fout("Athlete.txt",ios::app);
+    cout<<"Introdu numele sportivului:";
+    cin>>nume;
+    cout<<"Introdu prenumele sportivului:";
+    cin>>prenume;
+    cout<<"Introdu genul (M/F):";
+    cin>>gen;
+    if(gen != 'M' )
+    {
+        if(gen != 'm')
+        {
+            if(gen != 'F')
+            {
+                if(gen != 'f')
+                {
+                    cout<<yellow<<"Introdu un gen valid!"<<white<<endl;
+                    cin.get();
+                    cin.ignore();
+                    system("clear");
+                    main();
+                }
+            }
+        }
+    }
+    cout<<"Introdu greutate (Kg):";
+    cin>>greutate;
+    cout<<"Introdu inaltime (Cm):";
+    cin>>inaltime;
+    cout<<"Introdu varsta:";
+    cin>>varsta;
+    cout<<"Introdu ID-ul sportului practicat de "<<nume<<" "<<prenume<<":";
+    cin>>id_sport;
+    ifstream fin1("Sport.txt");
+    string categorie,denumire;
+    while(fin1 >> categorie >> denumire >> s)
+    {
 
+    }
+    ifstream fiin("Athlete.txt");
+    while(fiin >> nume1 >> prenume1 >> gen1 >> greutate1 >> inaltime1 >> varsta1 >> id_sport1 )
+    {
+        if(nume == nume1 and prenume == prenume1 and gen == gen1 and greutate == greutate1 and inaltime == inaltime1 and varsta == varsta1  and id_sport == id_sport1)
+        {
+            cout<<yellow<<"Acest sportiv este deja inregistrat in baza de date."<<white;
+            cin.get();
+            cin.ignore();
+            system("clear");
+            main();
+        }
+    }
+    fout<<nume<<" "<<prenume<<" "<<gen<<" "<<greutate<<" "<<inaltime<<" "<<varsta<<" "<<id_sport<<" "<<categorie<<" "<<denumire<<endl;
+    fout.close();
+    cout<<green<<"Atletul "<<nume<<" "<<prenume<<" a fost adaugat in baza de date cu succes!"<<white;
+    cin.get();
+    cin.ignore();
+    system("clear");
+    main();
 }
 
 void afiseaza_sport()
 {
-
+    string categorie,denumire,id_sport;
+    ifstream fin("Sport.txt");
+    if(!fin.is_open())
+    {
+        ofstream fout("Sport.txt");
+    }
+    cout<<"Categorie       "<<"Denumire        "<<"Id Sport     "<<endl;
+    while(fin >> categorie >> denumire >> id_sport)
+    {
+        cout << categorie << "       " << denumire << "        " << id_sport << endl;
+    }
+    cin.get();
+    cin.ignore();
+    system("clear");
+    main();
 }
 
-void afiseazaathlete()
+void afiseaza_athlete()
 {
-
+    string nume,prenume,id_sport;
+    char gen;
+    float greutate,inaltime;
+    int varsta;
+    ifstream fin("Athlete.txt");
+    if(!fin.is_open())
+    {
+        ofstream fout("Athlete.txt");
+    }
+    cout<<"Nume        "<<"Prenume        "<<"Gen (M/F)     "<<"Greutate (Kg)           "<<"Inaltime (Cm)         "<<"Varsta        "<<"Sport Practicat         "<<endl;
+    while(fin >> nume >> prenume >> gen >> greutate >> inaltime >> varsta >> id_sport)
+    {
+        cout << nume << "       " << prenume<< "        " << gen << "        " << greutate << "        " << inaltime << "         " << varsta << "          " << id_sport << endl;
+    }
+    cin.get();
+    cin.ignore();
+    system("clear");
+    main();
 }
 
 int main()
@@ -110,7 +206,7 @@ int main()
     cin>>n;
     switch(n)
     {
-        case 1 : afiseazaathlete(); break;
+        case 1 : afiseaza_athlete(); break;
         case 2 : afiseaza_sport(); break;
         case 3 : inregistreaza_sportiv(); break;
         case 4 : inregistreaza_sport(); break;
