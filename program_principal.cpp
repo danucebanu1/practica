@@ -71,16 +71,43 @@ void delete_sportiv()
 
 void inregistreaza_sport()
 {
-
+    string categorie,denumire;
+    string categorie_copy,denumire_copy;
+    int id_sport,id_sport_copy;
+    ofstream fout("Sport.txt",ios::app);
+    cout<<"Introdu categoria sportului:";
+    cin>>categorie;
+    cout<<"Introdu denumirea sportului:";
+    cin>>denumire;
+    cout<<"Introdu ID-ul sportului:";
+    cin>>id_sport;
+    ifstream fin("Sport.txt");
+    while(fin>>categorie_copy>>denumire_copy>>id_sport_copy)
+    {
+        if(id_sport_copy==id_sport)
+        {
+            cout<<yellow<<"Acest ID exista deja!"<<white;
+            cin.get();
+            cin.ignore();
+            system("clear");
+            main();
+        }
+    }
+    fout << categorie << " " << denumire << " " << id_sport << endl;
+    cout<<green<<"Ai inregistrat un sport cu succes!"<<white;
+    cin.get();
+    cin.ignore();
+    system("clear");
+    main();
 }
 
 void inregistreaza_sportiv()
 {
-    string nume,prenume,id_sport;
+    string nume,prenume;
     char gen;
     float greutate,inaltime;
-    int varsta;
-    string nume1,prenume1,id_sport1,s;
+    int varsta,id_sport,s,id_sport1;
+    string nume1,prenume1;
     char gen1;
     float greutate1 , inaltime1;
     int varsta1;
@@ -120,7 +147,18 @@ void inregistreaza_sportiv()
     string categorie,denumire;
     while(fin1 >> categorie >> denumire >> s)
     {
-
+        if(s=id_sport)
+        {
+            break;
+        }
+        else
+        {
+            cout<<red<<"Sport inexistent,creeaza un sport nou din meniul cu numarul 3"<<endl;
+            cin.get();
+            cin.ignore();
+            system("clear");
+            main();
+        }
     }
     ifstream fiin("Athlete.txt");
     while(fiin >> nume1 >> prenume1 >> gen1 >> greutate1 >> inaltime1 >> varsta1 >> id_sport1 )
