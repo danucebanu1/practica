@@ -1,4 +1,3 @@
 f f f 19 1 1 2000
 Danu Cebanu m 123 111 16 2100
-m m m 17 1 1 2000
-Danu Cebanu m 80 190 19 2000
+Danu Cebanu m 80 190 20 2000

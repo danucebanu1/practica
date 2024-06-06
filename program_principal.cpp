@@ -65,16 +65,21 @@ void actualizeaza_sport()
     cin>>id_sport;
     ifstream fin("Sport.txt");
     ofstream fout("Sport_copy.txt",ios::app);
-    while(fin>>categorie_copy>>denumire_copy>>id_copie)
+    while (fin >> categorie_copy >> denumire_copy >> id_copie)
     {
-        if(categorie_copy!=categorie || denumire_copy != denumire || id_copie!=id_sport)
-        {
-            cout<<red<<"Acest ID nu exista! Creeaza un sport nou in meniul 4"<<white;
+        cout<<categorie_copy<<" "<<denumire_copy<<" "<<id_copie<<endl;
+        if (categorie != categorie_copy && denumire != denumire_copy && id_sport != id_copie) 
+            {
+            cout<<red<<"Acest sport nu este inregistrat in baza de date."<<white;
             cin.get();
             cin.ignore();
             system("clear");
-            main();
-        }
+            main();  
+            }
+        else
+            {
+                break;
+            }
     }
     int n;
     cout<<"Introdu optiunea de actualizare a sportului "<<denumire<<":"<<endl;
@@ -105,10 +110,10 @@ void actualizeaza_sport()
         case 2 :
         cout<<"Introdu denumirea noua:";
         cin>>denumire_copy;
-        cout<<green<<"Ai schimbat denumirea de la "<<denumire<<" la "<<denumire_copy<<" cu succes!"<<endl;
+        cout<<green<<"Ai schimbat denumirea de la "<<denumire<<" la "<<denumire_copy<<" cu succes!"<<white<<endl;
         while(fin>>categorie_txt>>denumire_txt>>id_txt)
         {
-            if(categorie_txt != categorie_copy || denumire_txt != denumire || id_txt != id_sport)
+            if(categorie_txt != categorie || denumire_txt != denumire_copy || id_txt != id_sport)
             {
                 fout<<categorie_txt<<" "<<denumire_txt<<" "<<id_txt<<endl;
             }
@@ -134,7 +139,7 @@ void actualizeaza_sport()
                 main();
             }
         }
-        cout<<green<<"Ai schimbat ID-ul de la "<<id_sport<<" la "<<id_copie<<" cu succes!"<<endl;
+        cout<<green<<"Ai schimbat ID-ul de la "<<id_sport<<" la "<<id_copie<<" cu succes!"<<white<<endl;
         while(fin>>categorie_txt>>denumire_txt>>id_txt)
         {
             if(categorie_txt != categorie_copy || denumire_txt != denumire || id_txt != id_sport)
@@ -349,7 +354,85 @@ void delete_sport()
 
 void delete_sportiv()
 {
-
+    ifstream fin1("Sport.txt");
+    string categorie,denumire,categorie1,denumire1;
+    int s,s1;
+    int z;
+    string nume,prenume;
+    char gen;
+    float greutate,inaltime;
+    int id_sport,varsta,id_sport1;
+    string nume1,prenume1;
+    char gen1;
+    float greutate1 , inaltime1;
+    int varsta1;
+    cout<<"Introdu numele sportivului:";
+    cin>>nume;
+    cout<<"Introdu prenumele sportivului:";
+    cin>>prenume;
+    cout<<"Introdu genul (M/F):";
+    cin>>gen;
+    if(gen != 'M' )
+    {
+        if(gen != 'm')
+        {
+            if(gen != 'F')
+            {
+                if(gen != 'f')
+                {
+                    cout<<yellow<<"Introdu un gen valid!"<<white<<endl;
+                    cin.get();
+                    cin.ignore();
+                    system("clear");
+                    main();
+                }
+            }
+        }
+    }
+    cout<<"Introdu greutate (Kg):";
+    cin>>greutate;
+    cout<<"Introdu inaltime (Cm):";
+    cin>>inaltime;
+    cout<<"Introdu varsta:";
+    cin>>varsta;
+    cout<<"Introdu ID-ul sportului practicat de "<<nume<<" "<<prenume<<":";
+    cin>>id_sport;
+    ifstream fin("Athlete.txt");
+    float inaltime_copie,greutate_copie;
+    char gen_copie;
+    int id_copie,varsta_copie;
+    string nume_copie,prenume_copie;
+    ifstream fein("Athlete.txt");
+    ofstream fout2("Athlete_copy.txt",ios::app);
+    ofstream fout("Athlete.txt",ios::app);
+    while(fin >> nume1 >> prenume1 >> gen1 >> greutate1 >> inaltime1 >> varsta1 >> id_sport1 )
+    {
+        if(nume != nume1 && prenume != prenume1 && gen != gen1 && greutate != greutate1 && inaltime != inaltime1 && varsta != varsta1 && id_sport != id_sport1)
+        {
+            cout<<red<<"Acest sportiv nu este inregistrat in baza de date."<<white;
+            cin.get();
+            cin.ignore();
+            system("clear");
+            main();
+        }
+    }
+    cout<<green<<"You removed succesfully"<<white<<endl;
+    while(fein>>nume_copie>>prenume_copie>>gen_copie>>greutate_copie>>inaltime_copie>>varsta_copie>>id_copie)
+        {
+            if(nume_copie != nume || prenume_copie != prenume || gen_copie != gen || greutate_copie != greutate || inaltime_copie != inaltime || varsta_copie != varsta || id_copie != id_sport)
+            {
+                fout2<<nume_copie<<" "<<prenume_copie<<" "<<gen_copie<<" "<<greutate_copie<<" "<<inaltime_copie<<" "<<varsta_copie<<" "<<id_copie<<endl;
+            }
+        }
+    fein.close();
+    fout2.close();
+    fout.close();
+    remove("Athlete.txt");
+    rename("Athlete_copy.txt","Athlete.txt");
+    cin.get();
+    cin.ignore();
+    system("clear");
+    main();
 }
 
 void inregistreaza_sport()
