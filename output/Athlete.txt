@@ -1,7 +1,2 @@
-Danu Cebanu m 73 190 16 2001  
-Danu Iura F 90 900 130 2000  
-da nu f 20 20 20 2300  
-da nu f 20 20 20 2321  
-iura disnearski f 20 2 2 20  
-da da f 2 2 2 2222  
-d d f 2 2 2 2011 d d
+m m m 10 1 1 2000
+f f f 19 1 1 2000

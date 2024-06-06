@@ -56,6 +56,10 @@ void actualizeaza_sport()
 
 void actualizeaza_sportiv()
 {
+    ifstream fin1("Sport.txt");
+    string categorie,denumire,categorie1,denumire1;
+    int s,s1;
+    int z;
     string nume,prenume;
     char gen;
     float greutate,inaltime;
@@ -98,7 +102,7 @@ void actualizeaza_sportiv()
     ifstream fin("Athlete.txt");
     while(fin >> nume1 >> prenume1 >> gen1 >> greutate1 >> inaltime1 >> varsta1 >> id_sport1 )
     {
-        if(nume != nume1 and prenume != prenume1 and gen != gen1 and greutate != greutate1 and inaltime != inaltime1 and varsta != varsta1  and id_sport != id_sport1)
+        if(nume != nume1 || prenume || prenume1 || gen != gen1 || greutate != greutate1 || inaltime != inaltime1 || varsta != varsta1  || id_sport != id_sport1)
         {
             cout<<red<<"Acest sportiv nu este inregistrat in baza de date."<<white;
             cin.get();
@@ -118,6 +122,12 @@ void actualizeaza_sportiv()
     cout<<"[3] Varsta"<<endl;
     cout<<"[4] Sportul Practicat"<<endl;
     cout<<endl<<"Introdu optiunea:";
+    string nume_copie,prenume_copie;
+    float inaltime_copie,greutate_copie;
+    char gen_copie;
+    int id_copie,varsta_copie;
+    ifstream fein("Athlete.txt");
+    ofstream fout2("Athlete_copy.txt",ios::app);
     ofstream fout("Athlete.txt",ios::app);
     cin>>n;
     switch(n)
@@ -127,7 +137,19 @@ void actualizeaza_sportiv()
         cout<<"Introdu greutatea noua:";
         cin>>g;
         cout<<green<<"Ai schimbat greutatea de la "<<greutate<<" la "<<g<<" cu succes."<<white<<endl;
-        fout<<nume<<" "<<prenume<<" "<<gen<<" "<<g<<" "<<inaltime<<" "<<varsta<<" "<<id_sport<<endl;
+        while(fein>>nume_copie>>prenume_copie>>gen_copie>>greutate_copie>>inaltime_copie>>varsta_copie>>id_copie)
+        {
+            if(nume_copie != nume || prenume_copie != prenume || gen_copie != gen || greutate_copie != greutate || inaltime_copie != inaltime || varsta_copie != varsta || id_copie != id_sport)
+            {
+                fout2<<nume_copie<<" "<<prenume_copie<<" "<<gen_copie<<" "<<greutate_copie<<" "<<inaltime_copie<<" "<<varsta_copie<<" "<<id_copie<<endl;
+            }
+        }
+        fout2<<nume<<" "<<prenume<<" "<<gen<<" "<<g<<" "<<inaltime<<" "<<varsta<<" "<<id_sport<<endl;
+        fein.close();
+        fout2.close();
+        fout.close();
+        remove("Athlete.txt");
+        rename("Athlete_copy.txt","Athlete.txt");
         cin.get();
         cin.ignore();
         system("clear");
@@ -155,12 +177,8 @@ void actualizeaza_sportiv()
         main();
         break;
         case 4:
-        string categorie,denumire,categorie1,denumire1;
-        int s,s1;
-        int z;
         cout<<"Introdu ID-ul sportului nou practicat:";
         cin>>z;
-        ifstream fin1("Sport.txt");
         while(fin1 >> categorie >> denumire >> s)
         {
             if(g!=s)
@@ -190,8 +208,7 @@ void actualizeaza_sportiv()
         system("clear");
         main();
         break;
-        default : cout<<red<<"Introdu o varianta existenta!"<<white<<endl; cin.get(); cin.ignore(); system("clear"); actualizeaza_sportiv();
-
+        default : cout<<red<<"Introdu o varianta existenta!"<<white<<endl; 
     }
 }
 
@@ -308,7 +325,7 @@ void inregistreaza_sportiv()
             main();
         }
     }
-    fout<<nume<<" "<<prenume<<" "<<gen<<" "<<greutate<<" "<<inaltime<<" "<<varsta<<" "<<id_sport<<" "<<categorie<<" "<<denumire<<endl;
+    fout<<nume<<" "<<prenume<<" "<<gen<<" "<<greutate<<" "<<inaltime<<" "<<varsta<<" "<<id_sport<<endl;
     fout.close();
     cout<<green<<"Atletul "<<nume<<" "<<prenume<<" a fost adaugat in baza de date cu succes!"<<white;
     cin.get();
