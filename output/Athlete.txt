@@ -1,3 +1,7 @@
-f f f 19 1 1 2000
-Danu Cebanu m 123 111 16 2100
-Danu Cebanu m 80 190 20 2000
+Danu Cebanu m 70 190 16 2006
+Jordan Borough m 85 185 28 2008
+Islam Makhachev m 70 185 26 2000
+Khabib Nurmagomedov m 70 185 28 2000
+Jude Bellingham m 65 180 25 2002
+Kamaru Usman m 75 185 24 2000
+Leon Edwards m 75 188 32 2000
